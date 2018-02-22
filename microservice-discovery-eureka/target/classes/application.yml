@@ -1,0 +1,10 @@
+server:
+  port: 8761
+#register-with-eureka: false和fetch-registry: false表示只把这个eruka当做server，不把它当做client
+#defaultZone: http://localhost:9761/eureka：你想把eruka注册到哪个url
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka

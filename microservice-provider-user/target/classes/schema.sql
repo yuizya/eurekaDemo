@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user`(
+	id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '编号',
+	username VARCHAR(40),
+	`name` VARCHAR(20),
+	age INT(3),
+	balance DECIMAL(10,2)
+);
