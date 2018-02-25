@@ -1,5 +1,5 @@
 server:
-  port: 7903
+  port: 8082
 spring:
   jpa:
     database: mysql
@@ -8,9 +8,8 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-  #指定eureka的application名字  
   application:
-    name: microservice-provider-user2
+    name: microservice-consumer-movie-ribbon-properties-cutomizing
 mybatis:
   mapper-locations:
   - classpath*:mapper/*.xml
@@ -19,7 +18,7 @@ logging:
   level:
     root: info
     com.itmuch: debug
-eureka:
+eureka: 
   client:
 #作用：Eureka’s Health Checks
     healthcheck: 
@@ -31,4 +30,10 @@ eureka:
     #设置为true，可以使用ip访问
     prefer-ip-address: true
     #自定义eureka的instanceID：例子——microservice-provider-user:8080(默认主机名:应用名称:应用端口)
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}  
+    #instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+#作用：用于配置文件配置Ribbon      
+microservice-provider-user: 
+  ribbon: 
+    #作用：配置负载均衡的规则，负载均衡的规则有很多Random规则，加权优先级规则（com.netflix.loadbalancer.WeightedResponseTimeRule）等等
+    #此规则只适用于VIP为microservice-provider-user的RibbonClient，其他RibbonClient无效
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
