@@ -1,5 +1,5 @@
 server:
-  port: 7903
+  port: 7901
 spring:
   jpa:
     database: mysql
@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   #指定eureka的application名字  
   application:
-    name: microservice-provider-user2
+    name: microservice-provider-user
 mybatis:
   mapper-locations:
   - classpath*:mapper/*.xml

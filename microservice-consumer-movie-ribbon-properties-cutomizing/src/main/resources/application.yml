@@ -19,7 +19,7 @@ logging:
     root: info
     com.itmuch: debug
 eureka: 
-  client:
+  client: 
 #作用：Eureka’s Health Checks
     healthcheck: 
       enabled: true

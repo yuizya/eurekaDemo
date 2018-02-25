@@ -9,7 +9,7 @@ spring:
     password: root
     driver-class-name: com.mysql.jdbc.Driver
   application:
-    name: microservice-consumer-movie-ribbon-properties-cutomizing
+    name: microservice-consumer-movie-ribbon-without-eureka
 mybatis:
   mapper-locations:
   - classpath*:mapper/*.xml
@@ -31,9 +31,14 @@ eureka:
     prefer-ip-address: true
     #自定义eureka的instanceID：例子——microservice-provider-user:8080(默认主机名:应用名称:应用端口)
     #instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
-#作用：用于配置文件配置Ribbon      
-microservice-provider-user: 
-  ribbon: 
-    #作用：配置负载均衡的规则，负载均衡的规则有很多Random规则，加权优先级规则（com.netflix.loadbalancer.WeightedResponseTimeRule）等等
-    #此规则只适用于VIP为microservice-provider-user的RibbonClient，其他RibbonClient无效
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#禁止Ribbon使用eureka获取VIP    
+ribbon:
+  eureka:
+   enabled: false
+#指定RibbonClient访问的服务VIP   
+microservice-provider-user:
+  ribbon:
+    #设置RibbonClient可以访问的端口
+    #这里只设置了访问microservice-provider-user的8080端口，没设置访问7901端口，所以正常情况下是不会访问到7901端口
+    #因为已经禁止Ribbon去eureka注册中心找VIP了
+    listOfServers: localhost:8080
