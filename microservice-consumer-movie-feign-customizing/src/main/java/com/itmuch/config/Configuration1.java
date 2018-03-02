@@ -17,4 +17,4 @@ public class Configuration1 {
     Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;
     }
-}
+} 
