@@ -1,0 +1,36 @@
+server:
+  port: 8081
+spring:
+  jpa:
+    database: mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/mycinema
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: microservice-consumer-movie-feign-customizing
+mybatis:
+  mapper-locations:
+  - classpath*:mapper/*.xml
+  type-aliases-package: com.itmuch.cloud.entity    
+logging:
+  level: 
+    #指定需要打印日志的包名
+    com.itmuch.cloud.feign.UserFeignClient: debug
+    root: info
+    com.itmuch: debug
+eureka: 
+  client:
+#作用：Eureka’s Health Checks
+    healthcheck: 
+      enabled: true
+    service-url:
+      #user登录eureka服务器需要用户名和密码：把http://localhost:8761/eureka/ 改成http://user:password123@localhost:8761/eureka
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    #设置为true，可以使用ip访问
+    prefer-ip-address: true
+    #自定义eureka的instanceID：例子——microservice-provider-user:8080(默认主机名:应用名称:应用端口)
+    #instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}  
+    
